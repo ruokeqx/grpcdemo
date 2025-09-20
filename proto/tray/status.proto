@@ -1,0 +1,25 @@
+syntax = "proto3";
+package tray;
+
+option go_package = "github.com/ruokeqx/grpcdemo/proto/tray/statuspb";
+
+import "google/protobuf/empty.proto";
+
+message Status {
+  string  UUID = 1;
+  int64   TimeStamp = 2;
+  string  Msg = 3;
+}
+
+message StatusStreamMessage {
+  oneof content {
+//    client send
+    Status status = 1;
+//    server pull
+    google.protobuf.Empty pull_request = 2;
+  }
+}
+
+service StatusService {
+  rpc StreamStatus(stream StatusStreamMessage) returns (stream StatusStreamMessage);
+}
