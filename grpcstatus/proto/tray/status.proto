@@ -1,7 +1,7 @@
 syntax = "proto3";
 package tray;
 
-option go_package = "github.com/ruokeqx/grpcdemo/proto/tray/statuspb";
+option go_package = "github.com/ruokeqx/grpcdemo/grpcstatus/proto/tray/statuspb";
 
 import "google/protobuf/empty.proto";
 

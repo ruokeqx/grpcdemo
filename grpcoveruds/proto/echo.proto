@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package echo;
 
-option go_package = "./;echo";
+option go_package = "github.com/ruokeqx/grpcdemo/grpcoveruds/proto/echopb";
 
 service Echo {
   rpc SayHello (HelloRequest) returns (HelloReply) {}

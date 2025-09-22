@@ -5,7 +5,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/ruokeqx/grpcdemo/proto/tray/statuspb"
+	"github.com/ruokeqx/grpcdemo/grpcstatus/proto/tray/statuspb"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/emptypb"
 )

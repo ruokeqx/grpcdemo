@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ruokeqx/grpcdemo/proto/tray/statuspb"
+	"github.com/ruokeqx/grpcdemo/grpcstatus/proto/tray/statuspb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

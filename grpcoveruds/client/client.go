@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
-	proto "demo/proto"
+
+	"github.com/ruokeqx/grpcdemo/grpcoveruds/proto/echopb"
+
 	"fmt"
 
 	"log"
@@ -34,7 +36,7 @@ func main() {
 
 	fmt.Println("this is ok")
 
-	client := proto.NewEchoClient(conn)
+	client := echopb.NewEchoClient(conn)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -44,7 +46,7 @@ func main() {
 		name = os.Args[1]
 	}
 
-	response, err := client.SayHello(ctx, &proto.HelloRequest{Name: name})
+	response, err := client.SayHello(ctx, &echopb.HelloRequest{Name: name})
 	if err != nil {
 		if se, ok := status.FromError(err); ok {
 			if se.Code() != codes.OK {

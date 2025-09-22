@@ -2,23 +2,24 @@ package main
 
 import (
 	"context"
-	proto "demo/proto"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/ruokeqx/grpcdemo/grpcoveruds/proto/echopb"
+
 	"google.golang.org/grpc"
 )
 
 type server struct {
-	proto.UnimplementedEchoServer
+	echopb.UnimplementedEchoServer
 }
 
-func (s *server) SayHello(ctx context.Context, req *proto.HelloRequest) (*proto.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, req *echopb.HelloRequest) (*echopb.HelloReply, error) {
 	message := fmt.Sprintf("Hello, %s from server with PID %d", req.Name, os.Getpid())
-	return &proto.HelloReply{Message: message}, nil
+	return &echopb.HelloReply{Message: message}, nil
 }
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 	defer lis.Close()
 
 	s := grpc.NewServer()
-	proto.RegisterEchoServer(s, &server{})
+	echopb.RegisterEchoServer(s, &server{})
 
 	go func() {
 		sigCh := make(chan os.Signal, 1)
