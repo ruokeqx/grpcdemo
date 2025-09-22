@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"log"
-	"net"
 	"os"
 	"time"
 
@@ -16,36 +15,22 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func main() {
-	socketPath := "/tmp/grpc_uds.sock"
+const DefaultIpcDialTimeout = 2 * time.Second
 
+func main() {
 	if _, err := os.Stat(socketPath); os.IsNotExist(err) {
 		log.Printf("Socket file does not exist: %s\n", socketPath)
 	}
 
 	conn, err := grpc.NewClient(
-		"unix://"+socketPath,
+		targetPath,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithContextDialer(func(ctx context.Context, addr string) (net.Conn, error) {
-			return net.Dial("unix", socketPath)
-		}),
+		grpc.WithContextDialer(NewIpcConnection),
 	)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 	defer conn.Close()
-
-	//conn, err := grpc.Dial(
-	//	"unix://"+socketPath,
-	//	grpc.WithTransportCredentials(insecure.NewCredentials()),
-	//	grpc.WithContextDialer(func(ctx context.Context, addr string) (net.Conn, error) {
-	//		return net.Dial("unix", socketPath)
-	//	}),
-	//)
-	//if err != nil {
-	//	log.Fatalf("Failed to dial: %v", err)
-	//}
-	//defer conn.Close()
 
 	fmt.Println("this is ok")
 

@@ -3,6 +3,7 @@ module demo
 go 1.25.1
 
 require (
+	github.com/Microsoft/go-winio v0.6.2 // indirect
 	golang.org/x/net v0.41.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
